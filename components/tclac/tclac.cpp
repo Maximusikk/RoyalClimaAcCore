@@ -291,31 +291,35 @@ void tclacClimate::takeControl() {
 	}
 		
 	// Настраиваем режим работы кондиционера
-	switch (switch_climate_mode) {
-		case climate::CLIMATE_MODE_OFF:
-			dataTX[7] += 0b00000000;
-			dataTX[8] += 0b00000000;
-			break;
-		case climate::CLIMATE_MODE_AUTO:
-			dataTX[7] += 0b00000100;
-			dataTX[8] += 0b00001000;
-			break;
-		case climate::CLIMATE_MODE_COOL:
-			dataTX[7] += 0b00000100;
-			dataTX[8] += 0b00000011;	
-			break;
-		case climate::CLIMATE_MODE_DRY:
-			dataTX[7] += 0b00000100;
-			dataTX[8] += 0b00000010;	
-			break;
-		case climate::CLIMATE_MODE_FAN_ONLY:
-			dataTX[7] += 0b00000100;
-			dataTX[8] += 0b00000111;	
-			break;
-		case climate::CLIMATE_MODE_HEAT:
-			dataTX[7] += 0b00000100;
-			dataTX[8] += 0b00000001;	
-			break;
+	switch(switch_fan_mode) {
+	    case climate::CLIMATE_FAN_AUTO:      // Автоматический режим
+	        dataTX[8]  += 0b00000000;
+	        dataTX[10] += 0b00000000;
+	        break;
+	    case climate::CLIMATE_FAN_QUIET:    // Тихий режим
+	        dataTX[8]  += 0b10000000;
+	        dataTX[10] += 0b00000000;
+	        break;
+	    case climate::CLIMATE_FAN_LOW:      // Низкий
+	        dataTX[8]  += 0b00000000;
+	        dataTX[10] += 0b00000001;
+	        break;
+	    case climate::CLIMATE_FAN_MEDIUM:   // Средний (объединены MIDDLE и MEDIUM)
+	        dataTX[8]  += 0b00000000;
+	        dataTX[10] += 0b00000011; // или 0b00000110, нужно выбрать одно значение
+	        break;
+	    case climate::CLIMATE_FAN_HIGH:     // Высокий
+	        dataTX[8]  += 0b00000000;
+	        dataTX[10] += 0b00000111;
+	        break;
+	    case climate::CLIMATE_FAN_FOCUS:    // Фокусированный (направленный поток воздуха)
+	        dataTX[8]  += 0b00000000;
+	        dataTX[10] += 0b00000101;
+	        break;
+	    case climate::CLIMATE_FAN_DIFFUSE:  // Диффузный (рассеянный поток воздуха)
+	        dataTX[8]  += 0b01000000;
+	        dataTX[10] += 0b00000000;
+	        break;
 	}
 
 	// Настраиваем режим вентилятора
