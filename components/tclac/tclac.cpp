@@ -291,34 +291,36 @@ void tclacClimate::takeControl() {
 	}
 		
 	// Настраиваем режим работы кондиционера
+	// Удалите полностью второй блок switch(switch_fan_mode) и оставьте только первый:
+
 	switch(switch_fan_mode) {
 	    case climate::CLIMATE_FAN_AUTO:      // Автоматический режим
-	        dataTX[8]  += 0b00000000;
-	        dataTX[10] += 0b00000000;
+	        dataTX[8]  = 0b00000000;
+	        dataTX[10] = 0b00000000;
 	        break;
 	    case climate::CLIMATE_FAN_QUIET:    // Тихий режим
-	        dataTX[8]  += 0b10000000;
-	        dataTX[10] += 0b00000000;
+	        dataTX[8]  = 0b10000000;
+	        dataTX[10] = 0b00000000;
 	        break;
 	    case climate::CLIMATE_FAN_LOW:      // Низкий
-	        dataTX[8]  += 0b00000000;
-	        dataTX[10] += 0b00000001;
+	        dataTX[8]  = 0b00000000;
+	        dataTX[10] = 0b00000001;
 	        break;
-	    case climate::CLIMATE_FAN_MEDIUM:   // Средний (объединены MIDDLE и MEDIUM)
-	        dataTX[8]  += 0b00000000;
-	        dataTX[10] += 0b00000011; // или 0b00000110, нужно выбрать одно значение
+	    case climate::CLIMATE_FAN_MEDIUM:   // Средний
+	        dataTX[8]  = 0b00000000;
+	        dataTX[10] = 0b00000011; // Используйте одно значение (либо 0b00000011, либо 0b00000110)
 	        break;
 	    case climate::CLIMATE_FAN_HIGH:     // Высокий
-	        dataTX[8]  += 0b00000000;
-	        dataTX[10] += 0b00000111;
+	        dataTX[8]  = 0b00000000;
+	        dataTX[10] = 0b00000111;
 	        break;
-	    case climate::CLIMATE_FAN_FOCUS:    // Фокусированный (направленный поток воздуха)
-	        dataTX[8]  += 0b00000000;
-	        dataTX[10] += 0b00000101;
+	    case climate::CLIMATE_FAN_FOCUS:    // Фокусированный
+	        dataTX[8]  = 0b00000000;
+	        dataTX[10] = 0b00000101;
 	        break;
-	    case climate::CLIMATE_FAN_DIFFUSE:  // Диффузный (рассеянный поток воздуха)
-	        dataTX[8]  += 0b01000000;
-	        dataTX[10] += 0b00000000;
+	    case climate::CLIMATE_FAN_DIFFUSE:  // Диффузный
+	        dataTX[8]  = 0b01000000;
+	        dataTX[10] = 0b00000000;
 	        break;
 	}
 
