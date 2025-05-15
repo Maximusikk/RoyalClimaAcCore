@@ -291,35 +291,60 @@ void tclacClimate::takeControl() {
 	}
 		
 	// Настраиваем режим работы кондиционера
-	// Удалите полностью второй блок switch(switch_fan_mode) и оставьте только первый:
+	switch (switch_climate_mode) {
+		case climate::CLIMATE_MODE_OFF:
+			dataTX[7] += 0b00000000;
+			dataTX[8] += 0b00000000;
+			break;
+		case climate::CLIMATE_MODE_AUTO:
+			dataTX[7] += 0b00000100;
+			dataTX[8] += 0b00001000;
+			break;
+		case climate::CLIMATE_MODE_COOL:
+			dataTX[7] += 0b00000100;
+			dataTX[8] += 0b00000011;	
+			break;
+		case climate::CLIMATE_MODE_DRY:
+			dataTX[7] += 0b00000100;
+			dataTX[8] += 0b00000010;	
+			break;
+		case climate::CLIMATE_MODE_FAN_ONLY:
+			dataTX[7] += 0b00000100;
+			dataTX[8] += 0b00000111;	
+			break;
+		case climate::CLIMATE_MODE_HEAT:
+			dataTX[7] += 0b00000100;
+			dataTX[8] += 0b00000001;	
+			break;
+	}
 
 	switch(switch_fan_mode) {
-	    case climate::CLIMATE_FAN_AUTO:      // Автоматический режим
-	        dataTX[8]  = 0b00000000;
+	    case climate::CLIMATE_FAN_AUTO:
+	        dataTX[8] = 0b00000000;
 	        dataTX[10] = 0b00000000;
 	        break;
-	    case climate::CLIMATE_FAN_QUIET:    // Тихий режим
-	        dataTX[8]  = 0b10000000;
+	    case climate::CLIMATE_FAN_QUIET:
+	        dataTX[8] = 0b10000000; // Mute bit
 	        dataTX[10] = 0b00000000;
 	        break;
-	    case climate::CLIMATE_FAN_LOW:      // Низкий
-	        dataTX[8]  = 0b00000000;
-	        dataTX[10] = 0b00000001;
+	    case climate::CLIMATE_FAN_LOW:
+	        dataTX[8] = 0b00000000;
+	        dataTX[10] = 0b00000001; // Speed 1
 	        break;
-	    case climate::CLIMATE_FAN_MEDIUM:   // Средний
-	        dataTX[8]  = 0b00000000;
-	        dataTX[10] = 0b00000011; // Используйте одно значение (либо 0b00000011, либо 0b00000110)
+	    case climate::CLIMATE_FAN_MEDIUM:
+	        dataTX[8] = 0b00000000;
+	        dataTX[10] = 0b00000011; // Speed 3 (проверьте для вашей модели!)
 	        break;
-	    case climate::CLIMATE_FAN_HIGH:     // Высокий
-	        dataTX[8]  = 0b00000000;
-	        dataTX[10] = 0b00000111;
+	    case climate::CLIMATE_FAN_HIGH:
+	        dataTX[8] = 0b00000000;
+	        dataTX[10] = 0b00000111; // Speed 5
 	        break;
-	    case climate::CLIMATE_FAN_FOCUS:    // Фокусированный
-	        dataTX[8]  = 0b00000000;
-	        dataTX[10] = 0b00000101;
+	    case climate::CLIMATE_FAN_FOCUS:
+	        dataTX[8] = 0b00000000;
+	        dataTX[10] = 0b00000101; // Focus mode
 	        break;
-	    case climate::CLIMATE_FAN_DIFFUSE:  // Диффузный
-	        dataTX[8]  = 0b01000000;
+	    case climate::CLIMATE_FAN_DIFFUSE:
+	        dataTX[8] = 0b01000000; // Diffuse bit (возможно 0b00100000)
 	        dataTX[10] = 0b00000000;
 	        break;
 	}
