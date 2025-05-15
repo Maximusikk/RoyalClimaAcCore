@@ -320,36 +320,38 @@ void tclacClimate::takeControl() {
 
 	// Настраиваем режим вентилятора
 	switch(switch_fan_mode) {
-	    case climate::CLIMATE_FAN_AUTO:      // Automatic (fan=0x00)
-	        dataTX[8]  = 0b00000000;
-	        dataTX[10] = 0b00000000;
-	        break;
-	    case climate::CLIMATE_FAN_QUIET:     // Mute (fan=0x01 + mute=1)
-	        dataTX[8]  = 0b10000000;         // mute bit
-	        dataTX[10] = 0b00000000;
-	        break;
-	    case climate::CLIMATE_FAN_LOW:       // Speed 1 (fan=0x01)
-	        dataTX[8]  = 0b00000000;
-	        dataTX[10] = 0b00000001;
-	        break;
-	    case climate::CLIMATE_FAN_MEDIUM:    // Speed 3 (fan=0x02)
-	        dataTX[8]  = 0b00000000;
-	        dataTX[10] = 0b00000011;         // или 0b00000010, если нужен точный аналог
-	        break;
-	    case climate::CLIMATE_FAN_HIGH:      // Speed 5 (fan=0x03)
-	        dataTX[8]  = 0b00000000;
-	        dataTX[10] = 0b00000111;
-	        break;
-	    case climate::CLIMATE_FAN_FOCUS:     // Speed 4 (fan=0x05)
-	        dataTX[8]  = 0b00000000;
-	        dataTX[10] = 0b00000101;
-	        break;
-	    // Для Turbo (нет аналога в стандартных режимах ESPHome)
-	    // Можно добавить кастомный режим или использовать CLIMATE_FAN_HIGH + дополнительный флаг
-	    default:
-	        dataTX[8]  = 0b00000000;
-	        dataTX[10] = 0b00000000;  // fallback to Auto
-	        break;
+			case climate::CLIMATE_FAN_AUTO:
+				dataTX[8]	+= 0b00000000;
+				dataTX[10]	+= 0b00000000;
+				break;
+			case climate::CLIMATE_FAN_QUIET:
+				dataTX[8]	+= 0b10000000;
+				dataTX[10]	+= 0b00000000;
+				break;
+			case climate::CLIMATE_FAN_LOW:
+				dataTX[8]	+= 0b00000000;
+				dataTX[10]	+= 0b00000001;
+				break;
+			case climate::CLIMATE_FAN_MIDDLE:
+				dataTX[8]	+= 0b00000000;
+				dataTX[10]	+= 0b00000110;
+				break;
+			case climate::CLIMATE_FAN_MEDIUM:
+				dataTX[8]	+= 0b00000000;
+				dataTX[10]	+= 0b00000011;
+				break;
+			case climate::CLIMATE_FAN_HIGH:
+				dataTX[8]	+= 0b00000000;
+				dataTX[10]	+= 0b00000111;
+				break;
+			case climate::CLIMATE_FAN_FOCUS:
+				dataTX[8]	+= 0b00000000;
+				dataTX[10]	+= 0b00000101;
+				break;
+			case climate::CLIMATE_FAN_DIFFUSE:
+				dataTX[8]	+= 0b01000000;
+				dataTX[10]	+= 0b00000000;
+				break;
 	}
 	
 	// Устанавливаем режим качания заслонок
