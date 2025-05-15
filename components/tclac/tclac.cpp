@@ -323,43 +323,6 @@ void tclacClimate::takeControl() {
 	        dataTX[10] = 0b00000000;
 	        break;
 	}
-
-	// Настраиваем режим вентилятора
-	switch(switch_fan_mode) {
-	    case climate::CLIMATE_FAN_AUTO:      // Auto (fan=0x00)
-	        dataTX[8]  = 0b00000000;
-	        dataTX[10] = 0b00000000;
-	        break;
-	    case climate::CLIMATE_FAN_QUIET:     // Mute (fan=0x01 + mute=1)
-	        dataTX[8]  = 0b10000000;         // mute bit (бит 7)
-	        dataTX[10] = 0b00000001;         // speed 1
-	        break;
-	    case climate::CLIMATE_FAN_LOW:      // Speed 1 (fan=0x01)
-	        dataTX[8]  = 0b00000000;
-	        dataTX[10] = 0b00000001;
-	        break;
-	    case climate::CLIMATE_FAN_MEDIUM:   // Speed 3 (fan=0x02)
-	        dataTX[8]  = 0b00000000;
-	        dataTX[10] = 0b00000010;
-	        break;
-	    case climate::CLIMATE_FAN_HIGH:     // Speed 5 (fan=0x03)
-	        dataTX[8]  = 0b00000000;
-	        dataTX[10] = 0b00000011;
-	        break;
-	    case climate::CLIMATE_FAN_FOCUS:    // Speed 4 (fan=0x05)
-	        dataTX[8]  = 0b00000000;
-	        dataTX[10] = 0b00000101;
-	        break;
-	    // Дополнительный режим для Speed 2 (если нужен)
-	    case climate::CLIMATE_FAN_MIDDLE:   // Speed 2 (fan=0x04)
-	        dataTX[8]  = 0b00000000;
-	        dataTX[10] = 0b00000100;
-	        break;
-	    case climate::CLIMATE_FAN_DIFFUSE:  // Не скорость (бит 6 в dataTX[8])
-	        dataTX[8]  = 0b01000000;
-	        dataTX[10] = 0b00000000;
-	        break;
-	}
 	
 	// Устанавливаем режим качания заслонок
 	switch(switch_swing_mode) {
