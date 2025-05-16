@@ -157,9 +157,6 @@ void tclacClimate::readData() {
 				case FAN_FOCUS:
 					fan_mode = climate::CLIMATE_FAN_FOCUS;
 					break;
-				case FAN_TURBO:
-					fan_mode = climate::CLIMATE_FAN_TURBO;
-					break;
 				default:
 					fan_mode = climate::CLIMATE_FAN_AUTO;
 			}
@@ -340,10 +337,6 @@ void tclacClimate::takeControl() {
 	        break;
 	    case climate::CLIMATE_FAN_DIFFUSE:
 	        dataTX[10] = 0b00000011; // Скорость 5 (Turbo)
-	        break;
-	    case climate::CLIMATE_FAN_TURBO:
-	        dataTX[10] = 0b00000011; // Турбо режим
-	        dataTX[8] |= 0b00000001; // Добавляем turbo бит (если требуется)
 	        break;
 	}
 	
