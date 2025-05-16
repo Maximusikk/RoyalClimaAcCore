@@ -33,7 +33,6 @@ namespace tclac {
 #define FAN_AUTO		0b10000000	//auto
 #define FAN_QUIET		0x80		//silent
 #define FAN_LOW			0b10010000	//	|
-#define FAN_MIDDLE		0b11000000	//	||
 #define FAN_MEDIUM		0b10100000	//	|||
 #define FAN_HIGH		0b11010000	//	||||
 #define FAN_FOCUS		0b10110000	//	|||||
