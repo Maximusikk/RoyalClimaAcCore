@@ -157,7 +157,7 @@ void tclacClimate::readData() {
 				case FAN_FOCUS:
 					fan_mode = climate::CLIMATE_FAN_FOCUS;
 					break;
-				case: FAN_TURBO:
+				case FAN_TURBO:
 					fan_mode = climate::CLIMATE_FAN_TURBO;
 					break;
 				default:
