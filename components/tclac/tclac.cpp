@@ -145,11 +145,11 @@ void tclacClimate::readData() {
 				case FAN_AUTO:
 					fan_mode = climate::CLIMATE_FAN_AUTO;
 					break;
+				case CLIMATE_FAN_QUIET:
+					fan_mode = climate::CLIMATE_FAN_QUIET;
+					break;
 				case FAN_LOW:
 					fan_mode = climate::CLIMATE_FAN_LOW;
-					break;
-				case FAN_MIDDLE:
-					fan_mode = climate::CLIMATE_FAN_MIDDLE;
 					break;
 				case FAN_MEDIUM:
 					fan_mode = climate::CLIMATE_FAN_MEDIUM;
