@@ -317,27 +317,30 @@ void tclacClimate::takeControl() {
 
 	switch(switch_fan_mode) {
 	    case climate::CLIMATE_FAN_AUTO:
-	        dataTX[10] = 0b00000000; // Только скорость
+	        dataTX[10] = 0b00000000; // Автоматический режим
 	        break;
 	    case climate::CLIMATE_FAN_QUIET:
 	        dataTX[8] |= 0b10000000; // Добавляем mute бит
-	        dataTX[10] = 0b00000000;
+	        dataTX[10] = 0b00000001; // Тихий режим (Mute)
 	        break;
 	    case climate::CLIMATE_FAN_LOW:
-	        dataTX[10] = 0b00000001;
+	        dataTX[10] = 0b00000001; // Скорость 1
 	        break;
 	    case climate::CLIMATE_FAN_MEDIUM:
-	        dataTX[10] = 0b00000011;
+	        dataTX[10] = 0b00000100; // Скорость 2
 	        break;
 	    case climate::CLIMATE_FAN_HIGH:
-	        dataTX[10] = 0b00000111;
+	        dataTX[10] = 0b00000010; // Скорость 3
 	        break;
 	    case climate::CLIMATE_FAN_FOCUS:
-	        dataTX[10] = 0b00000101;
+	        dataTX[10] = 0b00000101; // Скорость 4
 	        break;
 	    case climate::CLIMATE_FAN_DIFFUSE:
-	        dataTX[8] |= 0b01000000; // Добавляем diffuse бит
-	        dataTX[10] = 0b00000000;
+	        dataTX[10] = 0b00000011; // Скорость 5 (Turbo)
+	        break;
+	    case climate::CLIMATE_FAN_TURBO:
+	        dataTX[10] = 0b00000011; // Турбо режим
+	        dataTX[8] |= 0b00000001; // Добавляем turbo бит (если требуется)
 	        break;
 	}
 	
