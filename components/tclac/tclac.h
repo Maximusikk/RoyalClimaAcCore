@@ -30,14 +30,15 @@ namespace tclac {
 #define FAN_SPEED_POS	8
 #define FAN_QUIET_POS	33
 
-#define FAN_AUTO		0b10000000	//auto
-#define FAN_QUIET		0x80		//silent
-#define FAN_LOW			0b10010000	//	|
-#define FAN_MEDIUM		0b10100000	//	|||
-#define FAN_HIGH		0b11010000	//	||||
-#define FAN_FOCUS		0b10110000	//	|||||
-#define FAN_DIFFUSE		0b10000000	//	POWER [7]
-#define FAN_SPEED_MASK	0b11110000	//FAN SPEED MASK
+#define FAN_AUTO        0b10000000  // auto
+#define FAN_QUIET       0x80        // silent
+#define FAN_LOW         0b10010000  // speed 1
+#define FAN_MEDIUM      0b10100000  // speed 2
+#define FAN_HIGH        0b11010000  // speed 3
+#define FAN_FOCUS       0b10110000  // speed 4
+#define FAN_TURBO       0b11110000  // turbo (max speed + дополнительный бит)
+#define FAN_DIFFUSE     0b10000000  // POWER [7]
+#define FAN_SPEED_MASK  0b11110000  // FAN SPEED MASK
 
 #define SWING_POS			10
 #define SWING_OFF			0b00000000
