@@ -50,7 +50,6 @@ SUPPORTED_FAN_MODES_OPTIONS = {
     "AUTO": ClimateMode.CLIMATE_FAN_AUTO,  # Доступен всегда
     "QUIET": ClimateMode.CLIMATE_FAN_QUIET,
     "LOW": ClimateMode.CLIMATE_FAN_LOW,
-    "MIDDLE": ClimateMode.CLIMATE_FAN_MIDDLE,
     "MEDIUM": ClimateMode.CLIMATE_FAN_MEDIUM,
     "HIGH": ClimateMode.CLIMATE_FAN_HIGH,
     "FOCUS": ClimateMode.CLIMATE_FAN_FOCUS,
